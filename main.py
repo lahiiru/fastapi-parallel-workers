@@ -1,16 +1,21 @@
 from fastapi import FastAPI
 import random
+
 app = FastAPI()
+
 class Context:
+    """
+    A class to hold job active flag amoung the application context
+    """
     active = True
 
 @app.get("/rotate")
 def rotate():
     Context.active = True
-    x = 0
+    n = 0
     while Context.active:
-        x = random.randrange(10)
-    return x
+        n = random.randrange(10)
+    return f"Your lucky number is {n}!"
     
 @app.get("/stop")
 def stop():
